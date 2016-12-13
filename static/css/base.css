@@ -1,0 +1,176 @@
+body {
+
+    color:#454545;
+    /*font-size:12px;*/
+}
+
+body,html {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    height: 100%;
+}
+
+#footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 50px;
+  background-color: #e7e7e7;
+}
+
+.footer-text{
+	padding-top: 20px;
+	text-align: center;
+}
+
+#main{
+    position: relative;
+    min-height:100%;
+}
+
+#content{
+    padding-bottom: 80px;
+
+}
+
+
+.hr_div{
+	margin: 10px 1px 10px 1px;
+    border-top: solid 1px #dddddd;
+}
+
+.index-main{
+	margin-top: 20px;
+}
+
+li{
+	list-style:none
+}
+.hidden{
+	display:none;
+}
+.login-email,.login-pwd,.register-email,.register-pwd{
+    border: solid 1px #d2d2d2;
+	border-radius: 2px;
+	box-shadow: inset 0 1px 0 #f8f8f8;
+	background-color: #fff;
+	padding: 4px 6px;
+	height: 36px;
+	line-height: 23px;
+	color: #333;
+	width: 260px;
+	vertical-align: baseline;
+}
+
+.popover-mask {
+	z-index: 9998;
+	position:fixed;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	background:#888;
+	opacity:0.6;
+	filter:alpha(opacity=60);
+    display: none;
+
+}
+
+.login-popover{
+	z-index:9999;
+	position:fixed;
+	top:50%;
+	left:50%;
+	width:600px;
+	height:320px;
+	margin:-170px 0 0 -300px;
+	border-radius:5px;
+	border:solid 1px #888;
+	background-color:#fafafa;
+	box-shadow: 0 0 10px #666;
+    display: none;
+}
+
+.reg-popover{
+    z-index:9999;
+	position:fixed;
+	top:50%;
+	left:50%;
+	width:600px;
+	height:360px;
+	margin:-200px 0 0 -300px;
+	border-radius:5px;
+	border:solid 1px #888;
+	background-color:#fafafa;
+	box-shadow: 0 0 10px #666;
+    display: none;
+}
+
+.login-title,.register-title{
+    border-bottom: 1px solid #ddd;
+    padding: 6px 12px 1px 20px;
+    position: relative;
+    color: #ff5500;
+}
+
+.login-form,.register-form{
+    padding-top:40px;
+    padding-right: 30px;
+    padding-left: 100px;
+    height: 150px;
+
+
+}
+
+.login-title .login-close,.register-title .register-close{
+    float: right;
+    padding: 10px;
+    color: #999999;
+    font-size: 18px;
+}
+
+.login-title .login-close:hover,.register-title .register-close:hover{
+    color: #333;
+}
+
+.signin .register{
+
+    margin: -20px -20px -50px -80px;
+    text-align: center;
+    font-size: 14px;
+}
+
+
+.signin li,.register li{
+    padding-left:3px;
+    margin-bottom: 12px;
+    margin-top: 12px;
+    list-style-type: none;
+}
+
+.signin li span,.register li span{
+    margin-right: 2px;
+    width: 10px;
+    text-align: right;
+    line-height: 32px;
+}
+
+.btn-login,.btn-register{
+    margin-left:20px;
+    width: 260px;
+}
+
+.reg-error{
+    border: solid 1px #ff3300;
+    background-color: #eeeeee;
+    color: #ff1100;
+    display:none;
+    line-height: 24px;
+}
+
+#login-error,#reg-error{
+    color: red;
+    font-size: 16px;
+    padding-left: 20px;
+}

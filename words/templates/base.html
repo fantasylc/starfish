@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-cn" {% block html %}{% endblock %}>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="icon" type="image/x-icon" href="" />
+        <link rel="shortcut icon" href="" type="image/x-icon" />
+        <meta http-equiv="pragma" content="no-cache"/>
+        <META HTTP-EQUIV="expires" CONTENT="0">
+        <link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap.min.css"/>
+        <link rel="stylesheet" type="text/css" href="/static/css/base.css"/>
+        {% block head %}
+        {% endblock %}
+    </head>
+    <body id="base_body">
+
+        {% include 'includes/nav.html' %}
+
+        <div id="main">
+             <div id="content">
+                {% block main %}{% endblock %}
+
+                {% include 'account/login.html' %}
+                {% include 'account/register.html' %}
+             </div>
+             <footer class="footer" id="footer">
+                 <div class="container footer-text">
+                     <p class="text-muted">©2016 小海星单词 All Rights Reserved </p>
+                 </div>
+             </footer>
+
+        </div>
+
+        <script type="text/javascript" src="/static/js/jquery.min.js"></script>
+        <script type="text/javascript" src="/static/bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/static/js/jquery.cookie.js"></script>
+        <script src="/static/js/base.js" type="text/javascript"></script>
+        {% block js %}{% endblock %}
+    </body>
+</html>
