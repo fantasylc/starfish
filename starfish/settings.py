@@ -81,8 +81,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'starfishdb',
-        'USER': 'starfish',
-        'PASSWORD': 'starfish',
+        'USER': 'root',
+        'PASSWORD': '2898827027',
         'HOST': '127.0.0.1',
         'PORT': 3306,
     }

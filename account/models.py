@@ -33,10 +33,14 @@ class User(AbstractBaseUser):
     motto = models.CharField(max_length=100, default='', verbose_name='个性签名')
     is_member = models.BooleanField(default=False, verbose_name='是否会员')
     is_admin = models.BooleanField(default=False, verbose_name='是否是管理员')
+
+    level = models.IntegerField(default=0, verbose_name="背诵单词水平 1:四级 2:六级 3:托福 4:雅思")
+    word_num_day = models.IntegerField(default=40, verbose_name="每天背诵量")
+
     add_time = models.DateTimeField(auto_now_add=True, verbose_name='注册时间')
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['email']
+    REQUIRED_FIELDS = []
 
     objects = UserManager()
 
