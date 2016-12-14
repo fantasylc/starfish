@@ -1,3 +1,4 @@
+# coding: utf-8
 """
 Django settings for starfish project.
 
@@ -141,3 +142,7 @@ EMAIL_SUBJECT_PREFIX = '小海星单词用户验证'
 EMAIL_USE_TLS = True
 
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+# redis 配置
+REDIS_HOST = '127.0.0.1'
+REDIS_PORT = 6379
