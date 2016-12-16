@@ -9,16 +9,18 @@ class WordsAdmin(admin.ModelAdmin):
 
 
 class WordBaseAdmin(admin.ModelAdmin):
-    list_display = ('id', 'word', 'meaning')
+    list_display = ('id', 'global_id', 'word', 'meaning')
     readonly_fields = ('global_id',)
 
 
 class ReciteRecordAdmin(admin.ModelAdmin):
     list_display = ('id', 'word', 'user_email', 'status',)
+    search_fields = ['user_id']
 
 
 class WordNodeAdmin(admin.ModelAdmin):
-    list_display = ('id', 'word', 'user_email')
+    list_display = ('id', 'word_id', 'word', 'user_id',  'user_email', 'content_cut')
+    search_fields = ['word_id', 'user_id']
 
 admin.site.register(Words, WordsAdmin)
 admin.site.register(CetFourWords, WordBaseAdmin)

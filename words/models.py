@@ -1,13 +1,14 @@
 # coding: utf-8
 from django.db import models
 from account.models import User
+from account.const import LEVEL_TRAN
+from .const import STATUS_TRAN
 # Create your models here.
-
 
 
 class Words(models.Model):
     """单词总表"""
-    word = models.CharField(max_length=50, default='', verbose_name="单词", db_index=True)
+    word = models.CharField(max_length=50, default='', verbose_name="单词", unique=True)
     meaning = models.CharField(max_length=100, default='', verbose_name="中文意思")
     example = models.TextField(verbose_name="例句")
 
@@ -18,7 +19,7 @@ class Words(models.Model):
 
 
 class WordsBase(models.Model):
-    word = models.CharField(max_length=50, default='', verbose_name="单词", db_index=True)
+    word = models.CharField(max_length=50, default='', verbose_name="单词", unique=True)
     meaning = models.CharField(max_length=100, default='', verbose_name="中文意思")
     example = models.TextField(verbose_name="例句")
     is_import = models.BooleanField(default=False, verbose_name="是否重点词汇")
@@ -72,20 +73,22 @@ class IeltsWords(WordsBase):
 
 class ReciteRecord(models.Model):
     """背诵记录"""
-    word_id = models.IntegerField(default=0, verbose_name="单词id")
-    level = models.IntegerField(default=0, verbose_name="单词水平")
-    user_id = models.IntegerField(default=0, verbose_name="用户id")
-    status = models.IntegerField(default=0, verbose_name="背诵状态 0:还没背,1:背诵中,3:已掌握")
+    word_id = models.IntegerField(default=0, verbose_name="单词id", db_index=True)
+    level = models.IntegerField(default=0, choices=LEVEL_TRAN.items(), verbose_name="单词水平")
+    user_id = models.IntegerField(default=0, verbose_name="用户id", db_index=True)
+    status = models.IntegerField(default=0, choices=STATUS_TRAN.items(), verbose_name="背诵状态 0:还没背,1:背诵中,3:已掌握")
     add_time = models.DateTimeField(auto_now_add=True, verbose_name="添加时间")
     update_time = models.DateTimeField(auto_now=True, verbose_name="更新时间")
 
-    @property
     def word(self):
-        return Words.objects.get(pk=self.word_id)
+        return Words.objects.get(pk=self.word_id).word
+    word.short_description = "单词"
+    word = property(word)
 
-    @property
     def user_email(self):
         return User.objects.get(pk=self.user_id).email
+    user_email.short_description = "用户邮箱"
+    user_email = property(user_email)
 
     class Meta:
         db_table = "recite_record"
@@ -111,7 +114,17 @@ class WordNote(models.Model):
     user_email.short_description = "用户邮箱"
     user_email = property(user_email)
 
+    def content_cut(self):
+        """获取笔记内容的前15个字符"""
+        return self.content[:15]+'...'
+    content_cut.short_description = "评论"
+    content_cut = property(content_cut)
+
     class Meta:
         db_table = 'wordnote'
         verbose_name_plural = verbose_name = "单词笔记"
 
+
+# class SynonymGroup(models.Model):
+#     """近义词"""
+#     w
