@@ -1,7 +1,8 @@
 # coding: utf-8
 from django.db import models
-
+from account.models import User
 # Create your models here.
+
 
 
 class Words(models.Model):
@@ -45,28 +46,28 @@ class CetFourWords(WordsBase):
     """四级词汇表"""
     class Meta(WordsBase.Meta):
         db_table = 'cet4_words'
-        verbose_name = "四级词汇"
+        verbose_name_plural = verbose_name = "四级词汇"
 
 
 class CetSixWords(WordsBase):
     """六级词汇"""
     class Meta(WordsBase.Meta):
         db_table = 'cet6_words'
-        verbose_name = "六级词汇"
+        verbose_name_plural = verbose_name = "六级词汇"
 
 
 class ToeftWords(WordsBase):
     """托福词汇"""
     class Meta(WordsBase.Meta):
         db_table = 'toeft_words'
-        verbose_name = '托福词汇'
+        verbose_name_plural = verbose_name = '托福词汇'
 
 
 class IeltsWords(WordsBase):
     """雅思词汇"""
     class Meta(WordsBase.Meta):
         db_table = 'ielts_words'
-        verbose_name = '雅思词汇'
+        verbose_name_plural = verbose_name = '雅思词汇'
 
 
 class ReciteRecord(models.Model):
@@ -75,14 +76,21 @@ class ReciteRecord(models.Model):
     level = models.IntegerField(default=0, verbose_name="单词水平")
     user_id = models.IntegerField(default=0, verbose_name="用户id")
     status = models.IntegerField(default=0, verbose_name="背诵状态 0:还没背,1:背诵中,3:已掌握")
-    note_id = models.IntegerField(default=0, verbose_name="笔记")
     add_time = models.DateTimeField(auto_now_add=True, verbose_name="添加时间")
     update_time = models.DateTimeField(auto_now=True, verbose_name="更新时间")
+
+    @property
+    def word(self):
+        return Words.objects.get(pk=self.word_id)
+
+    @property
+    def user_email(self):
+        return User.objects.get(pk=self.user_id).email
 
     class Meta:
         db_table = "recite_record"
         ordering = ['-update_time']
-        verbose_name = '背诵记录表'
+        verbose_name_plural = verbose_name = '背诵记录表'
 
 
 class WordNote(models.Model):
@@ -93,8 +101,17 @@ class WordNote(models.Model):
     add_time = models.DateTimeField(auto_now_add=True, verbose_name="添加时间")
     is_share = models.BooleanField(default=False, verbose_name="笔记是否共享")
 
+    def word(self):
+        return Words.objects.get(pk=self.word_id).word
+    word.short_description = "单词"
+    word = property(word)
+
+    def user_email(self):
+        return User.objects.get(pk=self.user_id).email
+    user_email.short_description = "用户邮箱"
+    user_email = property(user_email)
+
     class Meta:
         db_table = 'wordnote'
-        verbose_name = "单词笔记"
-
+        verbose_name_plural = verbose_name = "单词笔记"
 
