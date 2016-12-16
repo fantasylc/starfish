@@ -4,7 +4,7 @@
 
 $(document).ready(function(){
 
-    $('#nav-login').click(function(){
+    $('.login').click(function(){
         $('.popover-mask').fadeIn(50);
         $('.login-popover').show();
     });
@@ -134,5 +134,46 @@ $(document).ready(function(){
                   return false;
                   }
        });
+
+    $("#btn-set").click(function(){
+        var level = $("#level").val();
+        var word_num_day = $("#num_day").val();
+        if(level==0){
+            $("#set-err").html("请设置背诵范围！");
+        }
+        else if(word_num_day<=0){
+            $("#set-err").html("每天背诵量设置不符合规范！");
+        }
+        else {
+            $.ajax({
+                  type:'POST',
+                  url:'/account/set/',
+                  data:{"level":level, "word_num_day":word_num_day},
+                  dataType:'json',
+                  beforeSend:function(xhr){
+                     xhr.setRequestHeader("X-CSRFToken", $.cookie('csrftoken'));
+                  },
+                  success:function(data,textStatus){
+                      var status = data['status'];
+                      var message = data['message'];
+                      if(status == 'fail'){
+                          $("#set-err").html(message)
+                      }
+                      else if(status == 'success'){
+                          alert('信息保存成功!');
+                          location.reload();
+                      }
+                      else{
+                          alert('未知错误,请刷新再次尝试!');
+                      }
+                  },
+                  error:function(XMLHttpRequest, textStatus, errorThrown){
+                       alert(XMLHttpRequest.responseText);
+                  }
+                  });
+            return false;
+        }
+        return false;
+    });
 
 });

@@ -1,7 +1,13 @@
 from django.shortcuts import render
 
-# Create your views here.
+from account.const import LEVEL_TRAN
 
 
 def index(request):
-    return render(request, 'index.html')
+    levels = LEVEL_TRAN
+    return render(request, 'index.html', locals())
+
+
+def learning(request):
+    levels = LEVEL_TRAN
+    return render(request, 'learning.html', locals())

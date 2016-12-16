@@ -1,0 +1,43 @@
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">设置信息</h4>
+      </div>
+      <div class="modal-body">
+        <div class="set-form">
+                <div class="set-item" id="set-err">
+
+                </div>
+                <div class="set-item">
+                    <label>邮箱:</label>&nbsp;&nbsp;{{ request.user.email }}
+                </div>
+                <div class="set-item">
+                    <label for="level">背诵范围:&nbsp;&nbsp;</label>
+                    <select id="level">
+                        <option value=0>==请选择==</option>
+                        {% for k,v in levels.items %}
+                            {% ifequal k request.user.level %}
+                                <option selected="selected" value={{ k }}>{{ v }}</option>
+                            {% else %}
+                                <option value={{ k }}>{{ v }}</option>
+                            {% endifequal %}
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="set-item">
+                    <span for="num_day">每天背诵量:</span>&nbsp;&nbsp;
+                    <input id="num_day" type="number" value="{{ request.user.word_num_day }}"/>
+
+                </div>
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button class="btn" id="btn-set">保存</button>
+      </div>
+    </div>
+  </div>
+</div>

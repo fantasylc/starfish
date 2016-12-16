@@ -13,7 +13,9 @@ class UserManager(BaseUserManager):
             raise ValueError('邮箱或密码不能为空')
         user = self.model(email=self.normalize_email(email))
         user.set_password(password)
+        user.nickname = email.split("@", 1)[0]
         user.save(using=self._db)
+        print(user.nickname)
         return user
 
     def create_superuser(self, email, password, **kwargs):

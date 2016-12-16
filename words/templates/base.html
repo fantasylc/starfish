@@ -17,10 +17,10 @@
 
         <div id="main">
              <div id="content">
-                {% block main %}{% endblock %}
-
                 {% include 'account/login.html' %}
                 {% include 'account/register.html' %}
+                {% include 'account/set_info.html' %}
+                {% block main %}{% endblock %}
              </div>
              <footer class="footer" id="footer">
                  <div class="container footer-text">

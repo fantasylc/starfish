@@ -2,10 +2,11 @@
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 
 from .models import User
-from .utils import code2response
-from .const import Status
+from .utils import code2response, get_class_list
+from .const import Status, LEVEL_TRAN, Level
 import logging
 import re
 logger = logging.getLogger(__name__)
@@ -64,6 +65,32 @@ def register(request):
             return HttpResponse(code2response(Status.USER_IS_EXIST))
         user = User.objects.create_user(email, password=password_2)
         return HttpResponse(code2response(Status.REGISTER_SUC))
+
+
+@login_required
+def info(request):
+    """我的信息"""
+    levels = LEVEL_TRAN
+    return render(request, 'account/mine.html', locals())
+
+
+@login_required
+def set_info(request):
+    if request.method == 'POST':
+        level = int(request.POST.get("level"))
+        word_num_day = int(request.POST.get("word_num_day"))
+        if (not isinstance(word_num_day, int)) or (word_num_day <= 0):
+            return HttpResponse(code2response(Status.SET_INFO_ERR))
+        if not level in get_class_list(Level):
+            return HttpResponse(code2response(Status.SET_INFO_ERR))
+        user = request.user
+        user.level = level
+        user.word_num_day = word_num_day
+        user.save()
+        return HttpResponse(code2response(Status.SET_INFO_SUC))
+    levels = LEVEL_TRAN
+    return render(request, 'account/set_info.html', locals())
+
 
 
 

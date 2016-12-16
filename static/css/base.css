@@ -11,27 +11,32 @@ body,html {
     height: 100%;
 }
 
+select{
+    width: 180px;
+}
 #footer {
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 50px;
-  background-color: #e7e7e7;
+  height: 70px;
+  background-color: #10ae58;
 }
 
 .footer-text{
-	padding-top: 20px;
+	padding-top: 28px;
 	text-align: center;
 }
 
+.footer-text p{
+    color: #ffffff;
+}
 #main{
     position: relative;
     min-height:100%;
 }
 
 #content{
-    padding-bottom: 80px;
-
+    padding-bottom: 100px;
 }
 
 
@@ -50,6 +55,28 @@ li{
 .hidden{
 	display:none;
 }
+
+.nav-sf{
+    background-color:#10ae58;
+    height: 30px;
+    border: 1px;
+    border-radius: 0;
+}
+
+.nav-sf .navbar-nav > li > a{
+    color: #f1f1f1;
+    font-size: 16px;
+}
+
+.nav-sf .navbar-nav > li > a:hover{
+    color: #fff;
+}
+
+#nav-sf-home{
+    color: #f1f1f1;
+}
+
+
 .login-email,.login-pwd,.register-email,.register-pwd{
     border: solid 1px #d2d2d2;
 	border-radius: 2px;
@@ -174,3 +201,60 @@ li{
     font-size: 16px;
     padding-left: 20px;
 }
+
+
+.set-form{
+    height: 160px;
+    margin-left: 15%;
+    margin-top: 10%;
+}
+
+.set-item{
+    margin-top: 10px;
+}
+
+#btn-set, .index-btn-login{
+    background-color: #10ae58;
+    width: 76px;
+    color: #f0f0f0;
+    font-size: 16px;
+}
+
+#btn-set:hover, .index-btn-login:hover {
+    background-color: #25AE83;
+    color: #fff;
+}
+
+#btn-set:hover{
+    color: #ff5500;
+}
+
+#set-err{
+    color: #ff1100;
+}
+
+#myModalLabel{
+    color: #ff3300;
+}
+
+.index-not-login, .index-start-word{
+    margin-top: 30%;
+    text-align: center;
+}
+
+.btn-start-word {
+    background-color: #10ae58;
+    width: 120px;
+}
+
+.btn-start-word a{
+    color: #f0f0f0;
+    font-size: 16px;
+}
+
+.btn-start-word:hover {
+    background-color: #25AE83;
+    color: #fff;
+}
+
+

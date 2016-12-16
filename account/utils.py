@@ -15,9 +15,9 @@ def code2response(code):
     return json.dumps({'status': status, 'message': message})
 
 
-def get_enum_list(cls):
+def get_class_list(cls):
     """获取python类成员变量值列表
     """
-    members = [val for key, val in cls.__dict__.iteritems()
+    members = [val for key, val in cls.__dict__.items()
                       if not key.startswith('_')]
     return members
