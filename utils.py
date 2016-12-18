@@ -3,7 +3,7 @@
 from consts import STATUE_MESSAGE_MAP, Level
 from words.models import CetFourWords, CetSixWords, IeltsWords,ToeftWords
 import json
-
+import pickle
 
 def code2response(code):
     """将code转换为HttpResponse返回的json字符串对象

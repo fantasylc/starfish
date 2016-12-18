@@ -6,6 +6,15 @@ from django.contrib.auth.models import (
     BaseUserManager,
 )
 
+from redis_helper import user_client
+import pickle
+import redis
+import logging
+
+logger = logging.getLogger(__name__)
+
+USER_PRIFIX = "user_"
+
 
 class UserManager(BaseUserManager):
     def create_user(self, email, password=None, **kwargs):
@@ -15,7 +24,7 @@ class UserManager(BaseUserManager):
         user.set_password(password)
         user.nickname = email.split("@", 1)[0]
         user.save(using=self._db)
-        print(user.nickname)
+        user_client.set(self.gen_key(user.id),pickle.dumps(user, protocol=pickle.HIGHEST_PROTOCOL))
         return user
 
     def create_superuser(self, email, password, **kwargs):
@@ -25,11 +34,33 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
+    def gen_key(self, user_id):
+        return USER_PRIFIX + str(user_id)
+
+    def get_from_cache(self, user_id):
+        """从缓存取数据"""
+
+        key = self.gen_key(user_id)
+        try:
+            word = user_client.get(key)
+            if word:
+                return pickle.loads(word)
+        except redis.ConnectionError as e:
+            logger.error(e)
+        except TypeError as e:
+            logger.error(e)
+
+        # 如果缓存没有，从数据库拿
+        word = self.get(pk=user_id)
+        if word:
+            user_client.set(key, pickle.dumps(word, protocol=pickle.HIGHEST_PROTOCOL))
+        return word
+
 
 class User(AbstractBaseUser):
     """用户表模型"""
 
-    email = models.EmailField(verbose_name='邮箱', max_length=255, unique=True)
+    email = models.EmailField(verbose_name='email', max_length=255, unique=True)
     nickname = models.CharField(max_length=30, default='改个昵称吧', verbose_name='昵称')
     avatar = models.ImageField(upload_to='avatars', verbose_name='头像')
     motto = models.CharField(max_length=100, default='', verbose_name='个性签名', null=True)
