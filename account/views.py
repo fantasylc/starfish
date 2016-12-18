@@ -36,6 +36,7 @@ def user_login(request):
                 return HttpResponse(code2response(Status.LOGIN_SUC))
         else:
             return HttpResponse(code2response(Status.EMAIL_OR_PASS_ERR))
+    return render(request, 'account/login_2.html', locals())
 
 
 def user_logout(request):
@@ -65,6 +66,7 @@ def register(request):
             return HttpResponse(code2response(Status.USER_IS_EXIST))
         user = User.objects.create_user(email, password=password_2)
         return HttpResponse(code2response(Status.REGISTER_SUC))
+    return render(request, 'account/register_2.html', locals())
 
 
 @login_required

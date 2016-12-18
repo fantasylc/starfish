@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    <div class="row">
+        <div class="col-lg-3 col-sm-3 col-sm-3">
+
+        </div>
+        <div class="col-lg-6 col-sm-6 col-md-6">
+            <div class="login-form">
+                <form class="signin" id='login-form-id' name="loginform" method="post" role="form">
+                    {% csrf_token %}
+                    <ul>
+                        <li id="login-error">
+                        </li>
+                        <li>
+                            <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;
+                            <input class="login-email" id='login-email' type="text" name="login-email" placeholder="邮箱" required="required" />
+                        </li>
+                        <li>
+                            <span class="glyphicon glyphicon-lock"></span>&nbsp;&nbsp;
+                            <input class="login-pwd" type="password" id='login-pwd' name="login-pwd" placeholder="密码" required="required"/>
+                        </li>
+
+                        <li>
+                            <button class="btn btn-primary btn-login" id='login-submit' type="button" name="login-submit">登录</button>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
