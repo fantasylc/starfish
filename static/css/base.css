@@ -257,4 +257,76 @@ li{
     color: #fff;
 }
 
+.learn-word{
+    z-index: 9997;
+    display: none;
+    margin-top: 15%;
+    padding-left: 10%;
+}
+.word-0{
+    display: block;
+}
 
+.word-item{
+    margin-bottom: 18px;
+}
+
+.words-word, .words-meaning{
+    color: #ff3300;
+    font-size: 20px;
+}
+
+.words-example{
+    font-size: 16px;
+}
+
+.btn-remember{
+    background-color: #10ae58;
+    width: 80px;
+}
+
+.word-btn{
+    margin-top: 30px;
+    margin-left: 30%;
+    font-size: 20px;
+}
+
+.word-btn span{
+
+    color: #ff3300;
+    /*font-size: 20px;*/
+}
+
+.synonym{
+    margin-left: 40px;
+}
+
+.synonym span{
+    font-size: 18px;
+}
+
+.add-note{
+    margin-left: 2%;
+    cursor: pointer;
+    color: #408cff;
+}
+
+textarea{
+    margin-left: 2%;
+    width: 300px;
+}
+
+.note-nickname{
+    color: #408cff;
+}
+
+.form-note{
+    margin-top: 15px;
+}
+.word-note{
+    margin-top: 10px;
+}
+.note{
+    margin-top: 5px;
+    margin-left: 20px;
+}

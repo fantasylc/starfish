@@ -32,7 +32,7 @@ class User(AbstractBaseUser):
     email = models.EmailField(verbose_name='邮箱', max_length=255, unique=True)
     nickname = models.CharField(max_length=30, default='改个昵称吧', verbose_name='昵称')
     avatar = models.ImageField(upload_to='avatars', verbose_name='头像')
-    motto = models.CharField(max_length=100, default='', verbose_name='个性签名')
+    motto = models.CharField(max_length=100, default='', verbose_name='个性签名', null=True)
     is_member = models.BooleanField(default=False, verbose_name='是否会员')
     is_admin = models.BooleanField(default=False, verbose_name='是否是管理员')
 

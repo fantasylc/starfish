@@ -5,8 +5,8 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 
 from .models import User
-from .utils import code2response, get_class_list
-from .const import Status, LEVEL_TRAN, Level
+from utils import code2response, get_class_list
+from consts import Status, LEVEL_TRAN, Level
 import logging
 import re
 logger = logging.getLogger(__name__)
